@@ -66,6 +66,7 @@ spec:
                   sleep 3s;
                 done;
                 echo "Success connecting to {{ $coreServiceName }}:{{ $coreServiceAdminPort }}";
+                sleep 3s;
       containers:
         - name: "psql-init-update-cluster-checksums"
           {{/* Connect to the ProxySQL console and execute the SQL script `/data/update-cluster-checksums.sql` */}}
