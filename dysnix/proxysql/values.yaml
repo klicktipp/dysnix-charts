@@ -1,3 +1,4 @@
+---
 # Default values for proxysql.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
@@ -155,7 +156,7 @@ livenessProbe:
 
 # Enable SSL communication with the backend MySQL servers
 ssl:
-  ## When a cert and a key or fromSecret are provided use_ssl is be enabled automaticaly (in mysql_servers items)
+  ## When a cert and a key or fromSecret are provided use_ssl is enabled automaticaly (in mysql_servers items)
   #  if use_ssl is not specified.
   auto: true
 
@@ -173,7 +174,7 @@ ssl:
   fromSecret: ""
 
 secret:
-  # This are the variables to set `admin_credentials`
+  # These are the variables to set `admin_credentials`
   # WARNING: Set the `admin_credentials` variable to a non-default user other than admin`.
   #          ProxySQL reserves the default `admin` user for local connection via localhost only.
   admin_user: "proxysql-admin"
@@ -215,7 +216,7 @@ mysql_variables:
   # monitor_history: 600000
 
 ## Configures ProxySQL mysql users.
-#  For MySQL 8.0 paswords must be mysql_native_password.
+#  For MySQL 8.0 passwords must be mysql_native_password.
 #  ref: https://github.com/sysown/proxysql/wiki/MySQL-8.0
 #
 mysql_users:
@@ -247,7 +248,7 @@ mysql_query_rules:
 
 
 ## If enabled, generate automagically a list of proxysql servers based on the
-#    the number statefullset 'proxysql-core' replicas (default 3).
+#  number of statefullset 'proxysql-core' replicas (default 3).
 use_default_proxysql_servers: true
 
 ## Defines an additional list of ProxySQL peers (clustering).
@@ -383,7 +384,7 @@ proxysql_cluster:
     #    memory: 128Mi
 
   healthcheck:
-    # This is the healtcheck script executed by the k8s probes
+    # This is the healthcheck script executed by the k8s probes
     psql_user: null  # If not set use `.mysql_variables.monitor_username`
     psql_pass: null  # If not set use `.mysql_variables.monitor_password`
     psql_host: "127.0.0.1"  # The listening core host/pod. NOTE: User 'monitor' can only connect locally
@@ -396,7 +397,7 @@ proxysql_cluster:
     command: ["/bin/sh", "-c", "/usr/local/bin/proxysql_cluster_healthcheck.sh"]
 
 # Enable debugging container along the proxysql instance
-#   It may be usefull to access the proxysql admin interface locally to debug issues
+#   It may be useful to access the proxysql admin interface locally to debug issues
 debug:
   sidecar:
     # inject a debug sidecar container to all proxysql Pods
