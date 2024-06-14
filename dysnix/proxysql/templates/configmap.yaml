@@ -11,6 +11,7 @@ metadata:
   annotations:
     {{- toYaml .Values.commonAnnotations | nindent 4 }}
   {{- end }}
-data: 
+data:
+  SLEEP_BEFORE_CONNECTION_CHECK: {{ .Values.sleep_before_connection_check | quote }}
   proxysql.cnf: |
     {{- tpl (.Files.Get "files/proxysql.cnf") . | nindent 4 }}
