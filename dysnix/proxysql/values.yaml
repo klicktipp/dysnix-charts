@@ -411,3 +411,7 @@ debug:
       runAsGroup: 999
 
 terminationGracePeriodSeconds: 60
+
+# How long shall the pre-stop-Hook wait k8s to deregister the pod from the service,
+# before checking for open connections?
+sleep_before_connection_check: 15

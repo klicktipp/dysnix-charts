@@ -11,6 +11,6 @@ metadata:
   annotations:
     {{- toYaml .Values.commonAnnotations | nindent 4 }}
   {{- end }}
-data: 
+data:
   proxysql.cnf: |
     {{- tpl (.Files.Get "files/proxysql.cnf") . | nindent 4 }}

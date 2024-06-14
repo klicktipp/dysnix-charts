@@ -7,6 +7,7 @@
 set -euo pipefail
 
 PROXYSQL_SERVICE_PORT=${PROXYSQL_SERVICE_PORT_PROXY:-6033}
+SLEEP_BEFORE_CONNECTION_CHECK=${SLEEP_BEFORE_CONNECTION_CHECK:-15}
 SLEEP_MAX=3 # Maximum sleep duration in seconds.
 HEX_PORT=$(printf ':%04X' $PROXYSQL_SERVICE_PORT) # Convert the port number to a padded hexadecimal string.
 
@@ -37,10 +38,11 @@ function convert_hex_ip_to_decimal() {
   echo "${dec_ip:1}" # Remove the leading dot before returning the decimal IP
 }
 
-# Wait for 15 seconds, to give the k8s enough time to remove the pod from the service
-sleep 15
+echo "Wait for ${SLEEP_BEFORE_CONNECTION_CHECK} seconds, to give the k8s enough time to remove the pod from the service"
+echo "before checking for active connections."
+sleep ${SLEEP_BEFORE_CONNECTION_CHECK}
 
-# Main loop that checks for and handles active ProxySQL connections
+echo "Entering main loop waiting for active ProxySQL connections to end"
 while true; do
   connected_ips_hex=( $(get_connected_ips) ) # Retrieve list of currently connected IP addresses in hexadecimal format
 

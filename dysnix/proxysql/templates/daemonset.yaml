@@ -55,6 +55,9 @@ spec:
             {{- if .Values.proxysql_cluster.satellite.exit_on_error }}
             - "--exit-on-error"
             {{- end }}
+          env:
+            - name: SLEEP_BEFORE_CONNECTION_CHECK
+              value: {{ .Values.sleep_before_connection_check | quote }}
           envFrom:
           {{- if or .Values.readinessProbe.enabled .Values.livenessProbe.enabled }}
             - configMapRef:
