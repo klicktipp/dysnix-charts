@@ -37,6 +37,9 @@ function convert_hex_ip_to_decimal() {
   echo "${dec_ip:1}" # Remove the leading dot before returning the decimal IP
 }
 
+# Wait for 15 seconds, to give the k8s enough time to remove the pod from the service
+sleep 15
+
 # Main loop that checks for and handles active ProxySQL connections
 while true; do
   connected_ips_hex=( $(get_connected_ips) ) # Retrieve list of currently connected IP addresses in hexadecimal format
